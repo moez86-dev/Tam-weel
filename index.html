@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حاسبة القروض</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+    <div class="container py-5">
+        <h1 class="text-center mb-4"><i class="bi bi-calculator"></i> حاسبة القروض والأقساط 💰</h1>
+        
+        <!-- نموذج إضافة قرض جديد -->
+        <form id="loanForm" class="row g-3">
+            <div class="col-md-6">
+                <label for="loanAmount" class="form-label">مبلغ القرض (ريال سعودي):</label>
+                <input type="number" class="form-control" id="loanAmount" placeholder="أدخل مبلغ القرض" required>
+            </div>
+            <div class="col-md-6">
+                <label for="loanDuration" class="form-label">مدة السداد (بالسنوات):</label>
+                <input type="number" class="form-control" id="loanDuration" placeholder="أدخل مدة السداد" required>
+            </div>
+            <div class="col-md-6">
+                <label for="interestRate" class="form-label">نسبة الفائدة السنوية (%):</label>
+                <input type="number" class="form-control" id="interestRate" placeholder="أدخل نسبة الفائدة" required>
+            </div>
+            <div class="col-md-6">
+                <label for="loanStartDate" class="form-label">تاريخ الحصول على القرض:</label>
+                <input type="date" class="form-control" id="loanStartDate" required>
+            </div>
+            <div class="col-md-6">
+                <label for="firstPaymentDate" class="form-label">تاريخ أول سداد:</label>
+                <input type="date" class="form-control" id="firstPaymentDate" required>
+            </div>
+            <div class="col-md-6">
+                <label for="gracePeriodType" class="form-label">نوع فترة السماح:</label>
+                <select class="form-select" id="gracePeriodType" required>
+                    <option value="no-grace">بدون فترة سماح</option>
+                    <option value="no-interest">بدون فائدة</option>
+                    <option value="with-interest">مع فائدة</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="gracePeriodMethod" class="form-label">طريقة حساب فترة السماح:</label>
+                <select class="form-select" id="gracePeriodMethod" required>
+                    <option value="fixed">مدة ثابتة</option>
+                    <option value="reduced">مدة متغيرة</option>
+                </select>
+            </div>
+            <div class="col-12 text-center">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-plus-circle"></i> إضافة القرض
+                </button>
+            </div>
+        </form>
+
+        <!-- عرض جدول السداد -->
+        <div id="result" class="mt-5"></div>
+
+        <!-- قائمة القروض المخزنة -->
+        <div id="loanList" class="mt-5">
+            <h2><i class="bi bi-list-task"></i> قروضك المخزنة:</h2>
+            <ul id="loanItems" class="list-group"></ul>
+        </div>
+
+        <!-- زر تحويل التقرير إلى Excel -->
+        <div class="text-center mt-4">
+            <button id="exportToExcel" class="btn btn-success">
+                <i class="bi bi-file-earmark-excel"></i> تصدير التقرير إلى Excel
+            </button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.js"></script>
+</body>
+</html>
